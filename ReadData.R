@@ -3,8 +3,8 @@ options(scipen = 999)
 # Reading the Data
 
 library(demography)
-DNK <- hmd.mx(country = "DNK", username = "ozerbakar@hacettepe.edu.tr", 
-              password = "Ozer19871905*", label = "DENMARK")
+DNK <- hmd.mx(country = "DNK", username = "your username", 
+              password = "your password", label = "DENMARK")
 
 library(StMoMo)
 DNK.Fem <- StMoMoData(DNK, series = "female", type = "central")
@@ -60,3 +60,4 @@ Plat <- StMoMo(link = "log", staticAgeFun = TRUE,
                periodAgeFun = c("1", f.Plat), 
                cohortAgeFun = "1", 
                constFun = constPlat)
+
