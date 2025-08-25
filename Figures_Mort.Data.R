@@ -1,10 +1,10 @@
 
-N.of.Deaths <- readHMDweb("DNK", "Deaths_1x1", "ozerbakar@hacettepe.edu.tr", 
-                          "Ozer19871905*", fixup = TRUE)
-Exposures <- readHMDweb("DNK", "Exposures_1x1", "ozerbakar@hacettepe.edu.tr", 
-                        "Ozer19871905*", fixup = TRUE)
-Death.rate <- readHMDweb("DNK", "Mx_1x1", "ozerbakar@hacettepe.edu.tr", 
-                         "Ozer19871905*", fixup = TRUE)
+N.of.Deaths <- readHMDweb("DNK", "Deaths_1x1", "your username", 
+                          "your password", fixup = TRUE)
+Exposures <- readHMDweb("DNK", "Exposures_1x1", "your username", 
+                        "your password", fixup = TRUE)
+Death.rate <- readHMDweb("DNK", "Mx_1x1", "your username", 
+                         "your password", fixup = TRUE)
 
 N.of.Deaths.2024 <- N.of.Deaths %>% 
   filter(Year == 2024) %>%
@@ -53,3 +53,4 @@ Death_rates.plot <- ggplot(Death.rate.1950.2024, aes(x = as.factor(Age), y = Fem
 Combined.plot <- Deaths.plot + Exposures.plot
 print(Combined.plot)
 print(Death_rates.plot)
+
