@@ -19,8 +19,8 @@ lapply(c("ggplot2", "patchwork"), require, character.only = TRUE)
 options(scipen = 999)
 
 # Reading the Data
-DNK <- hmd.mx(country = "DNK", username = "ozerbakar@hacettepe.edu.tr", 
-              password = "Ozer19871905*", label = "DENMARK")
+DNK <- hmd.mx(country = "DNK", username = "your username", 
+              password = "your password", label = "DENMARK")
 
 # Transforming demography data into "StMoMo" data.
 DNK.Fem <- StMoMoData(DNK, series = "female", type = "central")
@@ -75,3 +75,4 @@ Plat <- StMoMo(link = "log", staticAgeFun = TRUE,
                periodAgeFun = c("1", f.Plat), 
                cohortAgeFun = "1", 
                constFun = constPlat)
+
