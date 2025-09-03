@@ -23,7 +23,7 @@ min_test <- graph.RF_CBD.fem %>%
 test_plot <- ggplot(graph.RF_CBD.fem, aes(x = Hyper.p, y = rmse.test)) +
   geom_point(color = "red", size = 3) +
   geom_point(data = min_test, color = "darkgreen", size = 3, shape = 17, fill = "green", stroke = 2) + 
-  geom_text(data = min_test, aes(label = round(rmse.train, 4)), vjust = -1, hjust = 0.5, color = "darkgreen", size = 3) +
+  geom_text(data = min_test, aes(label = round(rmse.test, 4)), vjust = -1, hjust = 0.5, color = "darkgreen", size = 3) +
   labs(
     title = "TEST",
     x = "Hyperparameter Set",
@@ -36,4 +36,5 @@ test_plot <- ggplot(graph.RF_CBD.fem, aes(x = Hyper.p, y = rmse.test)) +
   )
 
 train_plot + test_plot
+
 
