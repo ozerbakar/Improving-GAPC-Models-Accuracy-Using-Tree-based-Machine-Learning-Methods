@@ -8,4 +8,4 @@ Note that before applying the ML integrated model, the following scripts below m
 2. Fitting_Forecasting_Mort.Model
 3. ML-Data_Preperation
 
-For any comments and contribution, please get in touch: ozerbakar@gmail.com
+For any comments and contribution requests, please get in touch: ozerbakar@gmail.com / ozerbakar@hacettepe.edu.tr
