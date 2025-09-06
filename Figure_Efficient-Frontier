@@ -1,13 +1,13 @@
 # Pareto optimal function
-pareto_front <- function(graph.GB_LC.fem) {
-  keep <- rep(TRUE, nrow(graph.GB_LC.fem))
-  for (i in 1:nrow(graph.GB_LC.fem)) {
-    for (j in 1:nrow(graph.GB_LC.fem)) {
+pareto_front <- function(graph.RF_CBD.fem) {
+  keep <- rep(TRUE, nrow(graph.RF_CBD.fem))
+  for (i in 1:nrow(graph.RF_CBD.fem)) {
+    for (j in 1:nrow(graph.RF_CBD.fem)) {
       if (i != j) {
-        if (graph.GB_LC.fem$rmse.train[j] <= graph.GB_LC.fem$rmse.train[i] &&
-            graph.GB_LC.fem$rmse.test[j]  <= graph.GB_LC.fem$rmse.test[i] &&
-            (graph.GB_LC.fem$rmse.train[j] < graph.GB_LC.fem$rmse.train[i] ||
-             graph.GB_LC.fem$rmse.test[j]  < graph.GB_LC.fem$rmse.test[i])) {
+        if (graph.RF_CBD.fem$rmse.train[j] <= graph.RF_CBD.fem$rmse.train[i] &&
+            graph.RF_CBD.fem$rmse.test[j]  <= graph.RF_CBD.fem$rmse.test[i] &&
+            (graph.RF_CBD.fem$rmse.train[j] < graph.RF_CBD.fem$rmse.train[i] ||
+             graph.RF_CBD.fem$rmse.test[j]  < graph.RF_CBD.fem$rmse.test[i])) {
           keep[i] <- FALSE
           break
         }
@@ -16,18 +16,18 @@ pareto_front <- function(graph.GB_LC.fem) {
   }
   return(keep)
 }
-graph.GB_LC.fem$pareto <- pareto_front(graph.GB_LC.fem)
+graph.RF_CBD.fem$pareto <- pareto_front(graph.RF_CBD.fem)
 
 # Plot
 
-eff.front.plot.SWE <- ggplot(graph.GB_LC.fem, aes(x = rmse.train, y = rmse.test, color = pareto)) +
+eff.front.plot.DNK <- ggplot(graph.RF_CBD.fem, aes(x = rmse.train, y = rmse.test, color = pareto)) +
   geom_point(size = 4) +
-  geom_line(data = graph.GB_LC.fem[graph.GB_LC.fem$pareto, ][order(graph.GB_LC.fem$rmse.train), ], 
+  geom_line(data = graph.RF_CBD.fem[graph.RF_CBD.fem$pareto, ][order(graph.RF_CBD.fem$rmse.train), ], 
             aes(x = rmse.train, y = rmse.test), 
             color = "red") +
-  geom_text(data = graph.GB_LC.fem[graph.GB_LC.fem$pareto, ], aes(label = Hyper.p), vjust = -1, hjust = 0.5, color = "black", size = 3) +
+  geom_text(data = graph.RF_CBD.fem[graph.RF_CBD.fem$pareto, ], aes(label = Hyper.p), vjust = -1, hjust = 0.5, color = "black", size = 3) +
   scale_color_manual(values = c("darkgreen", "red")) +
-  labs(title = "GB-LC SWEDEN",
+  labs(title = "RF-CBD DENMARK",
        x = "Train", 
        y = "Test") +
   theme_minimal() +
