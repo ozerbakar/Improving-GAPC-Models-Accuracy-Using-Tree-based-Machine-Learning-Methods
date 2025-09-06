@@ -1,0 +1,35 @@
+
+RF.CBD.learner <- makeLearner("regr.ranger",
+                              mtry = 1,
+                              num.trees = 200,
+                              min.node.size = 1,
+                              importance = "permutation")
+
+RF.CBD.train.importance <- train(RF.CBD.learner, trainTask.RF.CBD)
+importance.results <- getFeatureImportance(RF.CBD.train.importance)
+print(importance.results$res)
+
+importance_data <- data.frame(
+  Variable = importance.results$res$variable,
+  Importance = importance.results$res$importance
+)
+
+# Grafikte değişkenleri önem sırasına göre sıralayın
+importance_data$Variable <- factor(importance_data$Variable, 
+                                   levels = importance_data$Variable[order(importance_data$Importance)])
+
+feat.imp.plot.DNK <- ggplot(importance_data, aes(x = Importance, y = Variable)) +
+  geom_col(fill = "deepskyblue4", width = 0.5) + # Çubuk rengini ve kalınlığını ayarlar
+  labs(
+    title = "RF-CBD DENMARK",
+    x = "Importance Score",
+    y = ""
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(size = 10),
+    axis.text.y = element_text(size = 14),
+    axis.title = element_text(size = 16)
+  )
+ggsave("DNK.feat.imp.plot.png", plot = feat.imp.plot.DNK, width = 8, height = 6, dpi = 600)
