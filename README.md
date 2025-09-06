@@ -2,6 +2,7 @@
 This repository includes the R codes of the preprint paper: "Can Tree-based Machine Learning Methods Improve GAPC Models' Forecasting Accuracy?
 
 The R codes are deliberatively written in the simplest way that everyone can understand step-by-step and easily apply to their own research. 
+** This code reproduces the results and graphs for Denmark, when another country is used; change the word DNK to SWE in the scripts.
 
 Note that before applying the ML integrated model, the following scripts below must be run in sequence:
 1. ReadData_LoadPackages
