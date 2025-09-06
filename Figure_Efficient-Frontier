@@ -1,0 +1,39 @@
+# Pareto optimal function
+pareto_front <- function(graph.GB_LC.fem) {
+  keep <- rep(TRUE, nrow(graph.GB_LC.fem))
+  for (i in 1:nrow(graph.GB_LC.fem)) {
+    for (j in 1:nrow(graph.GB_LC.fem)) {
+      if (i != j) {
+        if (graph.GB_LC.fem$rmse.train[j] <= graph.GB_LC.fem$rmse.train[i] &&
+            graph.GB_LC.fem$rmse.test[j]  <= graph.GB_LC.fem$rmse.test[i] &&
+            (graph.GB_LC.fem$rmse.train[j] < graph.GB_LC.fem$rmse.train[i] ||
+             graph.GB_LC.fem$rmse.test[j]  < graph.GB_LC.fem$rmse.test[i])) {
+          keep[i] <- FALSE
+          break
+        }
+      }
+    }
+  }
+  return(keep)
+}
+graph.GB_LC.fem$pareto <- pareto_front(graph.GB_LC.fem)
+
+# Plot
+
+eff.front.plot.SWE <- ggplot(graph.GB_LC.fem, aes(x = rmse.train, y = rmse.test, color = pareto)) +
+  geom_point(size = 4) +
+  geom_line(data = graph.GB_LC.fem[graph.GB_LC.fem$pareto, ][order(graph.GB_LC.fem$rmse.train), ], 
+            aes(x = rmse.train, y = rmse.test), 
+            color = "red") +
+  geom_text(data = graph.GB_LC.fem[graph.GB_LC.fem$pareto, ], aes(label = Hyper.p), vjust = -1, hjust = 0.5, color = "black", size = 3) +
+  scale_color_manual(values = c("darkgreen", "red")) +
+  labs(title = "GB-LC SWEDEN",
+       x = "Train", 
+       y = "Test") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 30),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 10),
+        axis.title.x = element_text(face = "bold", size = 15),
+        axis.title.y = element_text(face = "bold", size = 15))
+
