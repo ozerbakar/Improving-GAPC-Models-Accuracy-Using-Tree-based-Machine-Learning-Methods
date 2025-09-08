@@ -1,4 +1,4 @@
-
+# Hypermarameter set 13 is used for Denmark. For Sweden, to get the exact figure, hyperparameter set 24 must be used.
 RF.CBD.learner <- makeLearner("regr.ranger",
                               mtry = 1,
                               num.trees = 200,
@@ -14,7 +14,7 @@ importance_data <- data.frame(
   Importance = importance.results$res$importance
 )
 
-# Grafikte değişkenleri önem sırasına göre sıralayın
+# Ordering the features according to their importance
 importance_data$Variable <- factor(importance_data$Variable, 
                                    levels = importance_data$Variable[order(importance_data$Importance)])
 
